@@ -13,7 +13,7 @@ public class ChatFilter extends Plugin {
     @Getter
     private static ChatFilter instance;
 
-    private MainConfig mainConfig;
+    @Getter private MainConfig mainConfig;
 
     @Override
     public void onEnable() {
