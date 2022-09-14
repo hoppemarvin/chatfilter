@@ -51,6 +51,9 @@ public class PlayerListener implements Listener {
         p.sendMessage(new TextComponent("§cDu wurdest für §e30 Minuten §caus dem Chat gebannt."));
         p.sendMessage(new TextComponent("§4Grund: §eunangemessenes Chatverhalten"));
         p.sendMessage(new TextComponent("§7Nachricht: §8"+banEntry.getEvidence()));
-        p.sendMessage(new TextComponent("§cVerbleibende Zeit: §e"+new SimpleDateFormat("HH:mm:ss").format(new Date(banEntry.getTimestamp().getTime()))));
+        long ends = banEntry.getTimestamp().getTime() + (30*60*1000);
+        long remain = ends-System.currentTimeMillis();
+
+        p.sendMessage(new TextComponent("§cVerbleibende Zeit: §e"+new SimpleDateFormat("HH:mm:ss").format(new Date(remain))));
     }
 }

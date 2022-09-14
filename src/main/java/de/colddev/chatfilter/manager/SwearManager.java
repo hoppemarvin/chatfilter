@@ -3,6 +3,7 @@ package de.colddev.chatfilter.manager;
 import de.colddev.chatfilter.ChatFilter;
 import de.colddev.chatfilter.util.BanEntry;
 import de.colddev.chatfilter.util.SwearEntry;
+import lombok.Getter;
 
 import java.util.*;
 

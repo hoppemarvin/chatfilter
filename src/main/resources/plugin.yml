@@ -1,0 +1,4 @@
+name: chatfilter
+main: de.colddev.chatfilter.ChatFilter
+version: 1.0
+author: colddev

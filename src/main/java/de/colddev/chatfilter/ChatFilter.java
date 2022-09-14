@@ -2,6 +2,7 @@ package de.colddev.chatfilter;
 
 import de.colddev.chatfilter.config.ConfigLoader;
 import de.colddev.chatfilter.config.MainConfig;
+import de.colddev.chatfilter.listener.PlayerListener;
 import de.colddev.chatfilter.manager.SwearManager;
 import lombok.Getter;
 import net.md_5.bungee.api.plugin.Plugin;
@@ -36,5 +37,7 @@ public class ChatFilter extends Plugin {
 
         swearManager = new SwearManager();
         swearManager.enable();
+
+        getProxy().getPluginManager().registerListener(this, new PlayerListener());
     }
 }
