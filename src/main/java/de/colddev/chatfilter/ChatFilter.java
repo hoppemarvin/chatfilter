@@ -2,6 +2,7 @@ package de.colddev.chatfilter;
 
 import de.colddev.chatfilter.config.ConfigLoader;
 import de.colddev.chatfilter.config.MainConfig;
+import de.colddev.chatfilter.manager.SwearManager;
 import lombok.Getter;
 import net.md_5.bungee.api.plugin.Plugin;
 
@@ -14,6 +15,7 @@ public class ChatFilter extends Plugin {
     private static ChatFilter instance;
 
     @Getter private MainConfig mainConfig;
+    @Getter private SwearManager swearManager;
 
     @Override
     public void onEnable() {
@@ -31,5 +33,8 @@ public class ChatFilter extends Plugin {
             System.out.println("Could not load Plugin Config");
             System.exit(-1);
         }
+
+        swearManager = new SwearManager();
+        swearManager.enable();
     }
 }

@@ -1,6 +1,7 @@
 package de.colddev.chatfilter.manager;
 
 import de.colddev.chatfilter.ChatFilter;
+import de.colddev.chatfilter.util.BanEntry;
 import de.colddev.chatfilter.util.SwearEntry;
 
 import java.util.*;
@@ -8,10 +9,11 @@ import java.util.*;
 public class SwearManager extends Manager {
 
     private int largestWordLength = 0;
-    private static Map<String, SwearEntry> swears = new HashMap<String, SwearEntry>();
+    private Map<String, SwearEntry> swears = new HashMap<String, SwearEntry>();
+    private final long THIRTY_MINUTES = 30*60*1000;
 
     @Override
-    void enable() {
+    public void enable() {
         int readCounter = 0;
         for(SwearEntry entry : ChatFilter.getInstance().getMainConfig().getSwearEntries()){
             if(entry.getContent().length() > largestWordLength){
@@ -38,6 +40,18 @@ public class SwearManager extends Manager {
                 if (swears.containsKey(wordToCheck)) {
                     boolean ignore = false;
                     return swears.get(wordToCheck);
+                }
+            }
+        }
+        return null;
+    }
+
+    public BanEntry isBanned(UUID uuid){
+        for(BanEntry entry : ChatFilter.getInstance().getMainConfig().getBans()){
+            if(entry.getUuid().toString().equals(uuid.toString())){
+                long ago = System.currentTimeMillis()-THIRTY_MINUTES;
+                if(entry.getTimestamp().getTime() > ago){
+                    return entry;
                 }
             }
         }
